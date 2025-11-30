@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+
+// 1. CARICAMENTO CON VITE (Il nuovo standard)
+// 'eager: true' è FONDAMENTALE: dice a Vite di caricare subito le immagini e non aspettare.
+// Senza 'eager: true', caricherebbe solo i link e non le foto vere.
+const imageFiles = import.meta.glob('../../assets/non-ho-paura-del-buio/*.{jpeg,jpg,png,webp,JPG}', { eager: true });
+
+// 2. TRASFORMAZIONE
+// import.meta.glob restituisce un oggetto tipo { "foto1.jpg": dati, "foto2.jpg": dati }
+// Noi vogliamo solo i "dati" in una lista, quindi usiamo Object.values()
+const images = Object.values(imageFiles);
+---
+
+<BaseLayout titoloPagina="Elena Ghini - Non ho paura del buio">
+    
+    <div class="mb-8 mt-4 pl-4">
+        <a href="/#portfolio" class="text-xs uppercase tracking-widest text-gray-400 hover:text-black transition-colors">
+            ← Torna al Portfolio
+        </a>
+    </div>
+
+    <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 mx-auto px-4 max-w-[1400px]">
+        
+        {
+            images.map((img: any) => (
+                <div class="break-inside-avoid">
+                    <Image 
+                        src={img.default} 
+                        alt="Opera di Elena Ghini" 
+                        class="w-full h-auto"
+                        width={800} 
+                    />
+                </div>
+            ))
+        }
+
+    </div>
+
+    {images.length === 0 && <p class="text-center text-gray-400 py-20">Nessuna immagine trovata nella cartella assets/natura.</p>}
+
+    <div class="h-24"></div>
+
+</BaseLayout>
