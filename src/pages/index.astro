@@ -2,17 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import mostre from '../data/mostre.json';
 import { Image } from 'astro:assets';
+
 import fotoAutore from '../assets/foto-autore.jpg';
 import coverHero from '../assets/copertina.jpg';
 
+// 1. ORA CERCA ANCHE .png, .jpeg e .webp (non solo .jpg)
+const allCovers = import.meta.glob('../assets/**/copertina.{jpeg,jpg,png,webp,JPG,JPEG}', { eager: true });
 
-const allCovers = import.meta.glob('../assets/**/copertina.jpg', { eager: true });
-
-// Funzione per estrarre l'immagine giusta scrivendo solo il nome della cartella
 function getCover(nomeCartella) {
-    // Cerca il percorso che contiene "/nomeCartella/"
+    // Cerca un percorso che contenga il nome della cartella
     const path = Object.keys(allCovers).find(p => p.includes(`/${nomeCartella}/`));
-    if (!path) throw new Error(`Non trovo la copertina per: ${nomeCartella}`);
+    
+    if (!path) {
+        // Se non trova nulla, invece di rompere tutto, usa un'immagine di backup o lancia un errore chiaro
+        console.error(`ERRORE GRAVE: Non trovo un file chiamato 'copertina' nella cartella: ${nomeCartella}`);
+        throw new Error(`Manca l'immagine 'copertina' dentro la cartella: src/assets/${nomeCartella}/`);
+    }
     return (allCovers[path] as any).default;
 }
 ---
