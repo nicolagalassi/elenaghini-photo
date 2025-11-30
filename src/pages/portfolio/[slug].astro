@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content'; // Importa la funzione per le Collezioni
+
+// 1. ASTRO GENERA GLI URL (Static Path Generation)
+// Questa funzione dice ad Astro: "Controlla tutti i file in content/portfolio e genera una pagina per ognuno."
+export async function getStaticPaths() {
+  const portfolios = await getCollection('portfolio');
+  
+  return portfolios.map(progetto => ({
+    params: { slug: progetto.data.slug }, // Genera l'URL: /portfolio/slug-del-progetto
+    props: { progetto }, // Passa tutti i dati del file .md al componente
+  }));
+}
+
+// 2. RECUPERO DEI DATI
+const { progetto } = Astro.props;
+const currentLang = 'it'; // Fissiamo la lingua per questa cartella
+
+// 3. DATI SPECIFICI DEL PROGETTO
+const pageTitle = progetto.data.title_it;
+const backLink = "/#portfolio"; // Link per tornare alla sezione portfolio
+---
+
+<BaseLayout titoloPagina={`Elena Ghini - ${pageTitle}`}>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
+    <div class="mb-8 mt-4 pl-4">
+        <a href={backLink} class="text-xs uppercase tracking-widest text-gray-400 hover:text-black transition-colors">
+            ← Torna al Portfolio
+        </a>
+    </div>
+
+    <header class="max-w-6xl mx-auto px-4 mb-10">
+        <h1 class="text-4xl font-light uppercase tracking-widest text-center">{pageTitle}</h1>
+    </header>
+
+    <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 mx-auto px-4 max-w-[1400px]">
+        {/* Usiamo i dati della galleria passati dal CMS */}
+        {progetto.data.gallery && progetto.data.gallery.map((item) => {
+            // Selezioniamo la didascalia in base alla lingua
+            const caption = currentLang === 'en' ? item.caption_en : item.caption_it;
+
+            return (
+                <div class="break-inside-avoid relative group overflow-hidden">
+                    
+                    {/* LINK LIGHTBOX - data-title ora usa la didascalia del CMS */}
+                    <a 
+                        href={item.image} 
+                        class="glightbox block relative cursor-zoom-in" 
+                        data-title={caption || ''} 
+                    >
+                        {/* NOTA: Usiamo un tag <img> standard. 
+                            Le immagini del CMS sono in public/images/uploads e non possono essere ottimizzate con Astro Image.
+                        */}
+                        <img 
+                            src={item.image} 
+                            alt={caption || pageTitle} 
+                            class="w-full h-auto transition-transform duration-700 group-hover:scale-105"
+                            loading="lazy"
+                        />
+                    </a>
+                </div>
+            )
+        })}
+    </div>
+
+    {progetto.data.gallery && progetto.data.gallery.length === 0 && (
+        <p class="text-center text-gray-400 py-20">Nessuna immagine trovata per questa galleria.</p>
+    )}
+    <div class="h-24"></div>
+
+</BaseLayout>
+
+<script>
+    import GLightbox from 'glightbox';
+    // Se c'è un errore GLightbox non è disponibile. Controlla che sia installato: npm install glightbox
+    if (typeof GLightbox === 'function') {
+        const lightbox = GLightbox({ touchNavigation: true, loop: true, zoomable: true });
+    }
+</script>

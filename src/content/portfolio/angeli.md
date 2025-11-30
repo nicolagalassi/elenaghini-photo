@@ -1,0 +1,30 @@
+---
+slug: "angeli"
+title_it: "Angeli"
+title_en: "Angels"
+date: 2024-02-01T00:00:00.000Z
+cover_image: "/images/uploads/angeli/foto7.jpg"
+gallery:
+  - image: "/images/uploads/angeli/foto1.jpg"
+    caption_it: "La Caduta (Angeli 1)"
+    caption_en: "The Fall (Angels 1)"
+  - image: "/images/uploads/angeli/foto2.jpg"
+    caption_it: "Ali in Riposo (Angeli 2)"
+    caption_en: "Wings at Rest (Angels 2)"
+  - image: "/images/uploads/angeli/foto3.jpg"
+    caption_it: "Sguardo Lontano (Angeli 3)"
+    caption_en: "Gazing Afar (Angels 3)"
+  - image: "/images/uploads/angeli/foto4.jpg"
+    caption_it: "L'Attesa (Angeli 4)"
+    caption_en: "The Wait (Angels 4)"
+  - image: "/images/uploads/angeli/foto5.jpg"
+    caption_it: "La Carezza (Angeli 5)"
+    caption_en: "The Caress (Angels 5)"
+  - image: "/images/uploads/angeli/foto6.jpg"
+    caption_it: "Messaggero Celeste (Angeli 6)"
+    caption_en: "Celestial Messenger (Angels 6)"
+  - image: "/images/uploads/angeli/foto7.jpg"
+    caption_it: "Abbraccio di Luce (Angeli 7)"
+    caption_en: "Embrace of Light (Angels 7)"
+
+---

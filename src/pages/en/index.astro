@@ -1,11 +1,11 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import mostre from '../data/mostre.json';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import mostre from '../../data/mostre.json';
 import { Image } from 'astro:assets'; 
 import { getCollection } from 'astro:content';
 
-import fotoAutore from '../assets/foto-autore.jpg';
-import coverHero from '../assets/copertina.jpg';
+import fotoAutore from '../../assets/foto-autore.jpg';
+import coverHero from '../../assets/copertina.jpg';
 
 // 1. RECUPERA TUTTI I PORTFOLIO E ORDINA PER DATA (dal più recente)
 const portfolios = (await getCollection('portfolio'))
@@ -25,7 +25,7 @@ const portfolios = (await getCollection('portfolio'))
 
     <div class="max-w-3xl mx-auto text-center px-6 mt-16 mb-24">
         <p class="font-serif text-2xl md:text-3xl italic text-gray-800 leading-relaxed">
-            "Ogni volta che fotografo incornicio parti di me"
+            "Every time I take a photograph, I frame parts of myself"
         </p>
         <div class="w-12 h-px bg-gray-300 mx-auto mt-8"></div>
     </div>
@@ -41,10 +41,10 @@ const portfolios = (await getCollection('portfolio'))
                 <h2 class="text-3xl font-light uppercase tracking-widest">ELENA GHINI</h2>
                 <div class="w-12 h-0.5 bg-black mx-auto md:mx-0"></div>
                 <p class="text-gray-600 leading-relaxed font-light text-sm">
-                    NASCE A LUGO DI ROMAGNA NEL 1972, INIZIA A FOTOGRAFARE SIN DA ADOLESCENTE E, DAL 2012, INTENSIFICA LA SUA PASSIONE, DEDICANDOSI ALLA FOTOGRAFIA DI SCENA (TEATRO E DANZA) E IN SEGUITO ALLA RITRATTISTICA E AL NUDO ARTISTICO.
+                    BORN IN LUGO DI ROMAGNA IN 1972, SHE BEGAN PHOTOGRAPHING IN HER ADOLESCENCE AND, FROM 2012 ONWARD, DEEPENED HER PASSION, DEDICATING HERSELF TO STAGE PHOTOGRAPHY (THEATRE AND DANCE) AND LATER TO PORTRAITURE AND FINE ART NUDE PHOTOGRAPHY.
                 </p>
                 <p class="text-gray-600 leading-relaxed font-light text-sm">
-                    PROPRIO DALLA DANZA, E DALL'AMORE PER L'ARTE, PRENDE SPUNTO PER SVILUPPARE I SUOI PROGETTI FOTOGRAFICI E DARE VITA AL PROPRIO MONDO INTERIORE, SPERIMENTANDO IN OGNI SITUAZIONE SOPRATTUTTO ATTRAVERSO LA LUCE CHE INTERPRETA IN MODO PERSONALE.
+                    FROM DANCE, AND FROM HER LOVE FOR ART, SHE DRAWS INSPIRATION TO DEVELOP HER PHOTOGRAPHIC PROJECTS AND GIVE LIFE TO HER INNER WORLD, EXPERIMENTING IN EVERY SITUATION, ABOVE ALL THROUGH LIGHT, WHICH SHE INTERPRETS IN HER OWN PERSONAL WAY.
                 </p>
             </div>
         </div>
@@ -52,8 +52,8 @@ const portfolios = (await getCollection('portfolio'))
 
     <div class="max-w-3xl mx-auto text-center px-6 mt-24 mb-24">
         <p class="font-serif text-2xl md:text-3xl italic text-gray-800 leading-relaxed">
-            "Mi lascio contaminare dalla Natura, <br class="hidden md:block" />
-            per farla mia in fotografia"
+            "I let myself be influenced by Nature, <br class="hidden md:block" />
+            making it my own through photography"
         </p>
         <div class="w-12 h-px bg-gray-300 mx-auto mt-8"></div>
     </div>
@@ -86,7 +86,7 @@ const portfolios = (await getCollection('portfolio'))
 
     <section class="max-w-4xl mx-auto px-6 py-24">
         <div class="text-center mb-16">
-            <h2 class="text-3xl font-light uppercase tracking-widest text-gray-900">Esposizioni & Riconoscimenti</h2>
+            <h2 class="text-3xl font-light uppercase tracking-widest text-gray-900">Exhibitions & Awards</h2>
             <div class="w-12 h-px bg-gray-300 mx-auto mt-6"></div>
         </div>
         <div class="space-y-10 border-l border-gray-200 ml-4 md:ml-0 md:border-l-0">

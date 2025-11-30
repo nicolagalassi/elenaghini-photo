@@ -1,0 +1,74 @@
+---
+// ATTENZIONE: i percorsi degli import salgono di un livello in più
+import BaseLayout from '../../../layouts/BaseLayout.astro'; 
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const portfolios = await getCollection('portfolio');
+  
+  return portfolios.map(progetto => ({
+    params: { slug: progetto.data.slug },
+    props: { progetto },
+  }));
+}
+
+const { progetto } = Astro.props;
+const currentLang = 'en'; // 👈 CAMBIATO IN INGLESE
+
+// Titolo e link tradotti
+const pageTitle = progetto.data.title_en; // 👈 USA IL TITOLO INGLESE
+const backLink = "/en#portfolio"; // 👈 LINK PER TORNARE ALLA SEZIONE PORTFOLIO INGLESE
+---
+
+<BaseLayout titoloPagina={`Elena Ghini - ${pageTitle}`}>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
+    <div class="mb-8 mt-4 pl-4">
+        <a href={backLink} class="text-xs uppercase tracking-widest text-gray-400 hover:text-black transition-colors">
+            ← Back to Portfolio
+        </a>
+    </div>
+
+    <header class="max-w-6xl mx-auto px-4 mb-10">
+        <h1 class="text-4xl font-light uppercase tracking-widest text-center">{pageTitle}</h1>
+    </header>
+
+    <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 mx-auto px-4 max-w-[1400px]">
+        {progetto.data.gallery && progetto.data.gallery.map((item) => {
+            const caption = currentLang === 'en' ? item.caption_en : item.caption_it; // Seleziona didascalia EN
+
+            return (
+                <div class="break-inside-avoid relative group overflow-hidden">
+                    
+                    <a 
+                        href={item.image} 
+                        class="glightbox block relative cursor-zoom-in" 
+                        data-title={caption || ''} 
+                    >
+                        <img 
+                            src={item.image} 
+                            alt={caption || pageTitle} 
+                            class="w-full h-auto transition-transform duration-700 group-hover:scale-105"
+                            loading="lazy"
+                        />
+                    </a>
+                </div>
+            )
+        })}
+    </div>
+
+    {progetto.data.gallery && progetto.data.gallery.length === 0 && (
+        <p class="text-center text-gray-400 py-20">No images found for this gallery.</p>
+    )}
+    <div class="h-24"></div>
+
+</BaseLayout>
+
+<script>
+    import GLightbox from 'glightbox';
+    if (typeof GLightbox === 'function') {
+        const lightbox = GLightbox({ touchNavigation: true, loop: true, zoomable: true });
+    }
+</script>

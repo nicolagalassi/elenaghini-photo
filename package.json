@@ -11,6 +11,9 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.17",
     "astro": "^5.16.3",
-    "tailwindcss": "^4.1.17"
+    "decap-cms-app": "^3.9.0",
+    "glightbox": "^3.3.1",
+    "tailwindcss": "^4.1.17",
+    "trim": "^1.0.1"
   }
 }

@@ -1,0 +1,41 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images/uploads" # Dove finiscono le foto caricate da lei
+public_folder: "/images/uploads"      # Come le vede il sito
+
+collections:
+  # 1. GESTIONE MOSTRE (Modifica il file JSON esistente)
+  - name: "mostre"
+    label: "Esposizioni / Mostre"
+    files:
+      - name: "lista_mostre"
+        label: "Lista Mostre"
+        file: "src/data/mostre.json" # Punta al tuo file
+        fields:
+          - name: "mostre"
+            label: "Elenco Mostre"
+            widget: "list"
+            fields:
+              - {label: "Anno", name: "anno", widget: "string"}
+              - {label: "Titolo", name: "titolo", widget: "string"}
+              - {label: "Luogo/Dettagli", name: "luogo", widget: "string"}
+
+  # 2. GESTIONE PORTFOLIO (Crea nuove pagine)
+  - name: "portfolio"
+    label: "Gallerie Portfolio"
+    folder: "src/content/portfolio" # Crea nuovi file qui
+    create: true # Permette di aggiungere nuovi portfolio!
+    slug: "{{slug}}"
+    fields:
+      - {label: "Titolo Italiano", name: "title_it", widget: "string"}
+      - {label: "Titolo Inglese", name: "title_en", widget: "string"}
+      - {label: "Data (per ordinamento)", name: "date", widget: "datetime"}
+      - {label: "Immagine di Copertina", name: "cover_image", widget: "image"}
+      - label: "Galleria Immagini"
+        name: "gallery"
+        widget: "list"
+        fields:
+          - {label: "Immagine", name: "image", widget: "image"}
+          - {label: "Titolo Foto (Opzionale)", name: "caption", widget: "string", required: false}
