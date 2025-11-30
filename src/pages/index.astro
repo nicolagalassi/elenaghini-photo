@@ -5,11 +5,7 @@ import { Image } from 'astro:assets';
 import fotoAutore from '../assets/foto-autore.jpg';
 import coverHero from '../assets/copertina.jpg';
 
-/* MAGIA AUTOMATICA:
-   Invece di importare coverNatura, coverAngeli, ecc...
-   Questo comando carica TUTTE le immagini che si chiamano "copertina.jpg"
-   che si trovano dentro le sottocartelle di assets.
-*/
+
 const allCovers = import.meta.glob('../assets/**/copertina.jpg', { eager: true });
 
 // Funzione per estrarre l'immagine giusta scrivendo solo il nome della cartella
