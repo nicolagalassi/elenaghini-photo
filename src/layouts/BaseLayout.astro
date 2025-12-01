@@ -10,6 +10,21 @@ const { titoloPagina } = Astro.props;
 		<meta charset="utf-8" />
 		<title>{titoloPagina}</title>
         <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+        <script>
+        // Funzione necessaria per garantire che il widget sia pronto per intercettare i link di invito (#invite)
+        window.onload = function() {
+            if (window.netlifyIdentity) {
+                // Se l'utente clicca sul link di invito/reset, il widget si apre
+                // e processa il token nel frammento URL (es. #invite?token=...)
+                window.netlifyIdentity.on("init", user => {
+                    // Questa funzione è necessaria in caso di reload o cache
+                    if (user) {
+                        // Se l'utente è già loggato, fai qualcosa... (opzionale)
+                    }
+                });
+            }
+        };
+    </script>
 	</head>
     <body class="bg-white text-gray-800 font-sans flex flex-col min-h-screen">
         
