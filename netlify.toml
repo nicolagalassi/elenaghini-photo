@@ -1,22 +1,15 @@
-# netlify.toml
+# Netlify configuration
 
 [build]
-  # Istruzioni di build per Astro:
   command = "npm run build"
   publish = "dist"
 
-# Configurazione degli Headers HTTP per la sicurezza e l'Identity Widget
-[[headers]]
-  for = "/*" # Applica a tutte le pagine
-  [headers.values]
-    # Impedisce il clickjacking e risolve problemi comuni di Identity/Decap
-    X-Frame-Options = "DENY"
-    
-    # Previene i problemi di contenuto/MIME type
-    X-Content-Type-Options = "nosniff"
-    
-    # Direttive per la cache dell'Admin (assicura che il pannello sia sempre aggiornato)
-[[headers]]
-  for = "/admin/*"
-  [headers.values]
-    Cache-Control = "no-cache, must-revalidate"
+[[plugins]]
+  package = "netlify-plugin-cache"
+  [plugins.inputs]
+    # Cache Astro's build artifacts for faster rebuilds
+    paths = [
+      ".astro",              # Content Collections cache and build artifacts
+      "node_modules/.astro", # Image optimization cache (most critical)
+      "node_modules/.cache"  # Generic build tool caches
+    ]
