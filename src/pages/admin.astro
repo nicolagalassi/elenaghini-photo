@@ -1,6 +1,5 @@
 ---
-// src/pages/admin.astro
-// Nessun codice Astro nel frontmatter
+// src/pages/admin.astro - VERSIONE PULITA E FINALE
 ---
 <!doctype html>
 <html>
@@ -18,20 +17,5 @@
   
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
-  <script>
-    // 1. Diciamo al CMS di non partire da solo
-    window.CMS_MANUAL_INIT = true; 
-
-    // 2. Usiamo il gancio di Identity per avviare il CMS
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on('init', function() {
-        // Solo dopo che Identity è pronto e ha processato il token, avviamo il CMS
-        window.CMS.init();
-      });
-    } else {
-      // Fallback: se Identity non parte per qualche motivo, avviamo comunque il CMS
-      window.CMS.init();
-    }
-  </script>
-</body>
+  </body>
 </html>
