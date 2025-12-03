@@ -6,8 +6,8 @@ backend:
   base_url: https://elenaghiniphoto.netlify.app # change this to your prod URL
   auth_endpoint: oauth # the oauth route provided by the integration
 
-media_folder: "public/images/uploads" # Dove finiscono le foto caricate da lei
-public_folder: "/images/uploads"      # Come le vede il sito
+media_folder: "src/asset/uploads" # Dove finiscono le foto caricate da lei
+public_folder: "src/assets/uploads"      # Come le vede il sito
 
 collections:
   # 1. GESTIONE MOSTRE (Modifica il file JSON esistente)
