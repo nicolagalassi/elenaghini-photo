@@ -1,6 +1,10 @@
 backend:
   name: git-gateway
   branch: main
+  repo: nicolagalassi/elenaghini-photo # change this to your repo
+  site_domain: elenaghiniphoto.netlify.app # change this to your domain
+  base_url: https://elenaghiniphoto.netlify.app # change this to your prod URL
+  auth_endpoint: oauth # the oauth route provided by the integration
 
 media_folder: "public/images/uploads" # Dove finiscono le foto caricate da lei
 public_folder: "/images/uploads"      # Come le vede il sito
